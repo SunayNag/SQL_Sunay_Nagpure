@@ -70,6 +70,10 @@ department desc;
 select * from worker
 where first_name!='Vipul' and first_name!='Satish';
 
+-- 4
+select * from worker
+where first_name like '_____h';
+
 -- 5
 select count(worker_id)
 from worker
@@ -90,8 +94,14 @@ select w.* from worker w, worker d
 where w.worker_id!=d.worker_id and w.salary=d.salary;
 
 -- 10
-select department
-from worker 
-where department in
-(select department from worker group
-by department having count(*)<3);
+SELECT 
+    department
+FROM
+    worker
+WHERE
+    department IN (SELECT 
+            department
+        FROM
+            worker
+        GROUP BY department
+        HAVING COUNT(*) < 3);
